@@ -1,0 +1,21 @@
+datacenter = "my-datacenter-1"
+
+node_name = "nodo1"
+
+data_dir = "/opt/consul"
+
+client_addr = "0.0.0.0"
+
+ui_config{
+  enabled = true
+}
+
+server = true
+
+bind_addr = "192.168.100.19"
+
+bootstrap_expect=1
+
+retry_join = ["192.168.100.18","192.168.100.20"]
+
+

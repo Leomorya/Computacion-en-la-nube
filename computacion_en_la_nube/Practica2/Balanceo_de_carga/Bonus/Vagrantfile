@@ -1,0 +1,42 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define :web1 do |web1|
+    web1.vm.box = "bento/ubuntu-22.04"
+    web1.vm.network :private_network, ip: "192.168.100.6"
+    web1.vm.hostname = "web1"
+    
+    # Configura la carpeta compartida
+    web1.vm.synced_folder "./paginas_web", "/home/vagrant/paginas_web" 
+   
+    web1.vm.provision "shell", path: "script_web1.sh"
+  end
+  
+  config.vm.define :web2 do |web2|
+    web2.vm.box = "bento/ubuntu-22.04"
+    web2.vm.network :private_network, ip: "192.168.100.7"
+    web2.vm.hostname = "web2"
+    web2.vm.synced_folder "./paginas_web", "/home/vagrant/paginas_web"
+    
+    web2.vm.provision "shell", path: "script_web2.sh"
+  
+  
+  end
+
+  config.vm.define :haproxy do |haproxy|
+     haproxy.vm.box = "bento/ubuntu-22.04"
+     haproxy.vm.network :private_network, ip: "192.168.100.8"
+     haproxy.vm.hostname = "haproxy"
+     haproxy.vm.synced_folder "./paginas_web", "/home/vagrant/paginas_web"
+     
+     # Reenvío de puertos
+     haproxy.vm.network "forwarded_port", guest: 80, host: 8080
+     
+     haproxy.vm.provision "shell", path: "script_haproxy.sh"
+    
+  
+  end
+
+end

@@ -1,0 +1,23 @@
+HTTP/1.0 503 Service Unavailable
+Cache-Control: no-cache
+Connection: close
+Content-Type: text/html
+
+
+<html>
+  <head>
+  <meta charset="UTF-8">
+    <title>Servicio no disponible</title>
+    <style>
+      .rojo {
+        color: red;
+        font-size: 35px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="rojo">Servicio no disponible</h1>
+    <p>Por favor, inténtelo de nuevo más tarde, estamos trabajando en ello
+  </body>
+</html>

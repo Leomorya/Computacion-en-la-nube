@@ -1,0 +1,3 @@
+instances:
+  - name: my-web-container
+    image: ubuntu:22.04

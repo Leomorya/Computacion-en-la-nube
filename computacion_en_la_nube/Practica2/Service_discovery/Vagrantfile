@@ -1,0 +1,42 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define :clienteUbuntu do |clienteUbuntu|
+    clienteUbuntu.vm.box = "bento/ubuntu-22.04"
+    clienteUbuntu.vm.network :private_network, ip: "192.168.100.2"
+    clienteUbuntu.vm.hostname = "clienteUbuntu"
+  
+  # Aprovisionamiento para clienteUbuntu
+    clienteUbuntu.vm.provision "shell", inline: <<-SHELL
+      sudo apt update
+      sudo apt install -y vim net-tools
+    SHELL
+  
+  end
+
+  config.vm.define :servidorUbuntu do |servidorUbuntu|
+    servidorUbuntu.vm.box = "bento/ubuntu-22.04"
+    servidorUbuntu.vm.network :private_network, ip: "192.168.100.3"
+    servidorUbuntu.vm.hostname = "servidorUbuntu"
+    
+  # Configura la carpeta compartida
+    servidorUbuntu.vm.synced_folder "~/Especializacion/Materias", "/home/vagrant/Materias"
+  
+   # Aprovisionamiento para servidorUbuntu
+    servidorUbuntu.vm.provision "shell", inline: <<-SHELL
+      
+      
+      mkdir nueva_carpeta
+      sudo apt update
+      sudo apt install -y vim net-tools
+      
+      
+    SHELL
+  
+  end
+
+end
+
+

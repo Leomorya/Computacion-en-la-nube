@@ -1,0 +1,19 @@
+backend microservice1-backend
+    balance roundrobin
+    stats enable
+    stats auth admin:admin
+    stats uri /haproxy?stats
+
+    server-template mywebapp 1-2 _mymicroservice._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check port 3000
+    server-template mywebapp2 1-2 _mymicroservice._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check port 3001
+   
+frontend http_front
+   bind *:80
+   default_backend microservice1-backend
+   
+resolvers consul
+    nameserver consul 192.168.100.18:8600
+  
+  
+
+    

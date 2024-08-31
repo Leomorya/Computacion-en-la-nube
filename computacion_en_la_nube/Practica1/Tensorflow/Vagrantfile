@@ -1,0 +1,12 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "JeffersonPino/ubuntu-tensorflow"
+  config.vm.box_version = "0.1.0"
+  # Configuración del nombre y hostname
+  config.vm.define "tensorflow_vm" do |tensorflow_vm|
+    tensorflow_vm.vm.hostname = "tensorflow-vm"
+    tensorflow_vm.vm.synced_folder "~/Especializacion/Materias", "/home/vagrant/Materias"
+  end
+end

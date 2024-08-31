@@ -1,0 +1,1 @@
+En esta version se crean tres servidores en consul para poder apagar el nodeo lider y que la aplicación siga funcionando.

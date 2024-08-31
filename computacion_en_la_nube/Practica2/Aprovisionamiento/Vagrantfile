@@ -1,0 +1,25 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define :clienteUbuntu do |clienteUbuntu|
+    clienteUbuntu.vm.box = "bento/ubuntu-22.04"
+    clienteUbuntu.vm.network :private_network, ip: "192.168.100.15"
+    clienteUbuntu.vm.hostname = "clienteUbuntu"
+  end
+
+  config.vm.define :servidorUbuntu do |servidorUbuntu|
+     servidorUbuntu.vm.box = "bento/ubuntu-22.04"
+     servidorUbuntu.vm.network :private_network, ip: "192.168.100.16"
+     servidorUbuntu.vm.hostname = "servidorUbuntu"
+     
+     servidorUbuntu.vm.provision "shell", inline: <<-SHELL      
+      sudo apt update
+      sudo apt install -y vim 
+     SHELL
+     
+     servidorUbuntu.vm.provision "shell", path: "script.sh"
+  end
+
+end

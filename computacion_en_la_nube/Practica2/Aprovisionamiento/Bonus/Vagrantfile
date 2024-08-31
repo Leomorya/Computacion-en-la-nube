@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define :servidorlxc do |servidorlxc|
+     servidorlxc.vm.box = "bento/ubuntu-22.04"
+     servidorlxc.vm.network :private_network, ip: "192.168.100.10"
+     servidorlxc.vm.hostname = "servidorlxc"
+
+     # Opcional: Configura un script de provisionamiento si es necesario
+     servidorlxc.vm.provision "shell", path: "script1.sh"
+  
+  
+     # Configura la carpeta compartida
+      servidorlxc.vm.synced_folder "./items", "/home/vagrant/items" 
+
+  
+  end
+  
+  
+  
+end
+
