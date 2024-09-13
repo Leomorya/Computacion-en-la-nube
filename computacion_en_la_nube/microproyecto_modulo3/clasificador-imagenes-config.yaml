@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clasificador-imagenes-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clasificador-imagenes
+  template:
+    metadata:
+      labels:
+        app: clasificador-imagenes
+        version: v0
+    spec:
+      containers:
+      - name: clasificador-imagenes
+        image: leomorya/clasificador_imagenes:v0
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clasificador-imagenes-service
+spec:
+  selector:
+    app: clasificador-imagenes
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: LoadBalancer
+
+
