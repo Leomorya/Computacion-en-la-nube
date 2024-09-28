@@ -4,3 +4,6 @@ Modulo_3
 **/mynew.box
 **/.vagrant/
 Desarrollo_de_proyectos_con_IA
+microproyecto_modulo3/mongo-nodejs/mongo-data/.mongodb/mongosh/*.log
+
+.env
